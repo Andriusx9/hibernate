@@ -4,12 +4,16 @@ public class Car {
     private int carId;
     private String brand;
     private int carYear;
+    private Owner owner;
 
-
-    public Car(int carId, String brand, int carYear) {
+    public Car(int carId, String brand, int carYear, Owner owner) {
         this.carId = carId;
         this.brand = brand;
         this.carYear = carYear;
+        this.owner = owner;
+    }
+
+    public Car() {
     }
 
     public int getCarId() {
@@ -36,12 +40,21 @@ public class Car {
         this.carYear = carYear;
     }
 
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "carId=" + carId +
                 ", brand='" + brand + '\'' +
                 ", carYear=" + carYear +
+                ", owner=" + owner +
                 '}';
     }
 }

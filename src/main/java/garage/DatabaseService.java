@@ -23,7 +23,13 @@ public class DatabaseService {
             String brand = resultSet.getString("brand");
             int year = resultSet.getInt("year");
 
-            cars.add(new Car(carId, brand, year));
+            Car car = new Car();
+            car.setCarId(carId);
+            car.setBrand(brand);
+            car.setCarYear(year);
+
+            cars.add(car);
+//            cars.add(new Car(carId, brand, year));
 
         }
 
@@ -58,17 +64,41 @@ public class DatabaseService {
         return owners;
     }
 
-    public static ArrayList<Object> getAllCarsAndOwners() throws SQLException {
+    public static List<Car> getAllCarsAndOwners() throws SQLException {
+        Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(DatabaseQueries.SELECT_ALL_CARS_AND_OWNERS);
 
-        List<Car> cars = getAllCar();
-        List<Owner> owners = getAllOwners();
+        List<Car> cars = new ArrayList<>();
 
-        ArrayList<Object> carsAndOwners = new ArrayList<>();
+        while (resultSet.next()){
+            int ownerId = resultSet.getInt("owner_id");
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            int age = resultSet.getInt("age");
+            String email = resultSet.getString("email");
 
-        carsAndOwners.add(cars);
-        carsAndOwners.add(owners);
+            int carId = resultSet.getInt("car_id");
+            String brand = resultSet.getString("brand");
+            int year = resultSet.getInt("year");
 
-        return carsAndOwners;
+            Owner owner = new Owner();
+            owner.setOwnerId(ownerId);
+            owner.setFirstName(firstName);
+            owner.setLastName(lastName);
+            owner.setAge(age);
+            owner.setEmail(email);
+
+            Car car = new Car();
+            car.setCarId(carId);
+            car.setBrand(brand);
+            car.setCarYear(year);
+            car.setOwner(owner);
+
+            cars.add(car);
+        }
+
+        return cars;
     }
 
     public static void updateCar(int updatedCarId, String newCarBrand, int newCarYear, int newOwnerId) throws SQLException {

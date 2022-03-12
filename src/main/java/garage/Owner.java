@@ -15,6 +15,9 @@ public class Owner {
         this.email = email;
     }
 
+    public Owner() {
+    }
+
     public int getOwnerId() {
         return ownerId;
     }
