@@ -3,6 +3,7 @@ package exampleForBestPractices.repository;
 import exampleForBestPractices.utils.DatabaseQueries;
 import exampleForBestPractices.utils.DatabaseUtils;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -37,11 +38,51 @@ public class ProjectRepository {
 
         try {
             Statement statement = DatabaseUtils.databaseConnection.createStatement();
-            String sql = String.format(DatabaseQueries.Find_PROJECTS_BY_BUDGET, budget);
+            String sql = String.format(DatabaseQueries.FIND_PROJECTS_BY_BUDGET, budget);
             projectResultSet = statement.executeQuery(sql);
 
         } catch (SQLException exception) {
             exception.printStackTrace();
+        }
+
+        return projectResultSet;
+    }
+
+    public void updateProject(String newProjectName, int newProjectBudget, int updatedProjectId) {
+        try {
+            PreparedStatement preparedStatement = DatabaseUtils.databaseConnection.prepareStatement(DatabaseQueries.UPDATE_PROJECT_BY_ID);
+            preparedStatement.setString(1, newProjectName);
+            preparedStatement.setInt(2, newProjectBudget);
+            preparedStatement.setInt(3, updatedProjectId);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void deleteProjectById(int deletedProjectId) {
+        try {
+            PreparedStatement preparedStatement = DatabaseUtils.databaseConnection.prepareStatement(DatabaseQueries.DELETE_PROJECT_BY_ID);
+            preparedStatement.setInt(1, deletedProjectId);
+
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ResultSet findProjectById(int projectId) {
+        ResultSet projectResultSet = null;
+
+        try {
+            PreparedStatement preparedStatement = DatabaseUtils.databaseConnection.prepareStatement(DatabaseQueries.FIND_PROJECT_BY_ID);
+            preparedStatement.setInt(1, projectId);
+            projectResultSet = preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return projectResultSet;
