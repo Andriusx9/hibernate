@@ -24,23 +24,33 @@ public class Main {
 
         System.out.println();
 
-        System.out.println("Updatina projekta kur ID = 1:");
-        projectRepository.updateProject("B-Mobile", 50001, 1);
-        ResultSet projectById = projectRepository.findProjectById(1);
-        printingService.printAllProjects(projectById);
+        ResultSet projectByName = projectRepository.findByName("Pokemon");
+        printingService.printAllProjects(projectByName);
 
         System.out.println();
 
-        System.out.println("Deletina projekta kur id: 4 ir atspausdina visus likusius projektus:");
-        projectRepository.deleteProjectById(4);
-        ResultSet allProjects = projectRepository.findAll();
-        printingService.printAllProjects(allProjects);
+        projectRepository.addProject("e-sveikata", 55555);
+        ResultSet newlyAddedProject = projectRepository.findByName("e-sveikata");
+        printingService.printAllProjects(newlyAddedProject);
 
-        System.out.println();
-
-        EngineerRepository engineerRepository = new EngineerRepository();
-        ResultSet allEngineersWhoWorkOnProjects = engineerRepository.findAllEngineersWhoWorkOnProjects();
-        printingService.printAllEngineersWhoWorkOnProjects(allEngineersWhoWorkOnProjects);
+//        System.out.println("Updatina projekta kur ID = 1:");
+//        projectRepository.updateProject("B-Mobile", 50001, 1);
+//        ResultSet projectById = projectRepository.findProjectById(1);
+//        printingService.printAllProjects(projectById);
+//
+//        System.out.println();
+//
+//        System.out.println("Deletina projekta kur id: 4 ir atspausdina visus likusius projektus:");
+//        projectRepository.deleteProjectById(4);
+//        ResultSet allProjects = projectRepository.findAll();
+//        printingService.printAllProjects(allProjects);
+//
+//        System.out.println();
+//
+//        System.out.println("Suranda visus engineers kurie dirba prie projektu:");
+//        EngineerRepository engineerRepository = new EngineerRepository();
+//        ResultSet allEngineersWhoWorkOnProjects = engineerRepository.findAllEngineersWhoWorkOnProjects();
+//        printingService.printAllEngineersWhoWorkOnProjects(allEngineersWhoWorkOnProjects);
 
 
     }

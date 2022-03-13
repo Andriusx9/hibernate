@@ -16,15 +16,15 @@ public class EngineerRepository {
 
     public ResultSet findAllEngineersWhoWorkOnProjects() {
 
-        ResultSet engineerResulSet = null;
+        ResultSet engineerResultSet = null;
         try {
             Statement statement = DatabaseUtils.databaseConnection.createStatement();
-            engineerResulSet = statement.executeQuery(DatabaseQueries.FIND_ALL_ENGINEERS_WHO_WORKING_ON_PROJECTS);
+            engineerResultSet = statement.executeQuery(DatabaseQueries.FIND_ALL_ENGINEERS_WHO_WORKING_ON_PROJECTS);
 
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-        return engineerResulSet;
+        return engineerResultSet;
     }
 
 }

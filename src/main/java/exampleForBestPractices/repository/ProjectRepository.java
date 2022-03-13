@@ -87,4 +87,36 @@ public class ProjectRepository {
 
         return projectResultSet;
     }
+
+        public ResultSet findByName(String projectName) {
+            ResultSet projectResultSet = null;
+
+            try {
+                Statement statement = DatabaseUtils.databaseConnection.createStatement();
+                String sql = String.format(DatabaseQueries.FIND_PROJECT_BY_NAME, projectName);
+                projectResultSet = statement.executeQuery(sql);
+
+            } catch (SQLException exception) {
+                exception.printStackTrace();
+            }
+            return projectResultSet;
+        }
+
+        public void addProject(String projectName, int budget) {
+
+            int affectedRows = 0;
+            try {
+                Statement statement = DatabaseUtils.databaseConnection.createStatement();
+                String sql = String.format(DatabaseQueries.ADD_PROJECT, projectName, budget);
+                affectedRows = statement.executeUpdate(sql);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            if (affectedRows == 1) {
+                System.out.println("Project Added");
+            }
+        }
+
 }

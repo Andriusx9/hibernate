@@ -8,7 +8,7 @@ public class DatabaseUtils {
 
     private static final String DATABASE_USER = "root";
     private static final String DATABASE_PASSWORD = "root";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/jdbcfun?serverTimezone=UTC";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/jdbcfun2?serverTimezone=UTC";
 
     public static Connection databaseConnection = createDatabaseConnection();
 
